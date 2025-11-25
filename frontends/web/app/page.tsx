@@ -928,6 +928,16 @@ type PredictionBundle = {
   paperTrading: NullableNumber;
 };
 
+type DirectionalSignal = {
+  direction: "UP" | "DOWN";
+  confidence: number;
+  expectedReturn: NullableNumber;
+  expectedRange: { low: NullableNumber; high: NullableNumber };
+  regime: "trend" | "mean_revert";
+  topDriver?: string;
+  factors: FactorBreakdown[];
+};
+
 function PredictionSection({
   bundle,
   ticker,
@@ -1213,7 +1223,11 @@ function buildPredictions(
   };
 }
 
-function computeDirectionalSignal(window: PricePoint[], intrinsicValue: NullableNumber, macroVix?: NullableNumber) {
+function computeDirectionalSignal(
+  window: PricePoint[],
+  intrinsicValue: NullableNumber,
+  macroVix?: NullableNumber,
+): DirectionalSignal {
   const closes = window
     .map((point) => point.close)
     .filter((value) => Number.isFinite(value)) as number[];
