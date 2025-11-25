@@ -1349,7 +1349,7 @@ function computeAlpha(history: PricePoint[], benchmarkHistory: PricePoint[]): Nu
   if (!history?.length || !benchmarkHistory?.length) return null;
   const own = computeSimpleReturn(history);
   const bench = computeSimpleReturn(benchmarkHistory);
-  if (own === null || bench === null) return null;
+  if (own == null || bench == null) return null;
   return own - bench;
 }
 
