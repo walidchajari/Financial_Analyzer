@@ -1132,7 +1132,13 @@ function buildPredictions(
   macroVix?: NullableNumber,
 ): PredictionBundle {
   if (!history || history.length < 6) {
-    return { rows: [], stats: [], alphaVsBenchmark: null, benchmarkLabel: benchmarkLabel || "SPY" };
+    return {
+      rows: [],
+      stats: [],
+      alphaVsBenchmark: null,
+      benchmarkLabel: benchmarkLabel || "SPY",
+      paperTrading: null,
+    };
   }
 
   const horizons = [
