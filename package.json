@@ -1,0 +1,13 @@
+{
+  "name": "projet-testing",
+  "version": "1.0.0",
+  "description": "Script Python qui récupère des données Yahoo Finance pour analyser automatiquement une action (ratios, DCF simplifié, scoring, verdict et recommandation) conformément au processus décrit.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
