@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: analyzer-backend
+    environment:
+      - ANALYZER_DATA_DIR=/data
+    volumes:
+      - analyzer-data:/data
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontends/web
+    container_name: analyzer-frontend
+    environment:
+      - BACKEND_API_BASE=http://backend:8000
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  analyzer-data:
