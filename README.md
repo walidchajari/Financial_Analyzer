@@ -82,3 +82,20 @@ npm run dev -- --hostname 127.0.0.1 --port 3002
 - Les données sont récupérées via `yfinance`, donc un accès réseau vers Yahoo Finance est nécessaire. En mode offline, fournissez les overrides (prix, EPS, FCF, etc.).
 - ROADMAP.md recense les futures idées (données macro/ESG, backtests, stress tests, API publique, etc.).
 - Les modules Portefeuille/Alertes sont maintenant persistés sur disque (`./storage/portfolio.json`, `./storage/alerts.json`). Modifiez `ANALYZER_DATA_DIR` pour changer l’emplacement ou montez un volume persistant en production.
+
+## Déploiement Docker Compose (backend + frontend)
+
+La stack se déploie en conteneurs : un service FastAPI Python et un service Next.js. Le fichier `docker-compose.yml` construit les deux images et lie le frontend au backend via l’URL interne `http://backend:8000`.
+
+```bash
+# Construire et lancer
+docker compose up --build
+
+# Backend FastAPI disponible sur http://127.0.0.1:8000
+# Frontend Next.js disponible sur http://127.0.0.1:3000
+
+# Arrêter et nettoyer
+docker compose down
+```
+
+> Le volume `analyzer-data` persiste les fichiers de portefeuille/alertes dans le conteneur backend. Ajustez `ANALYZER_DATA_DIR` ou les ports mappés dans `docker-compose.yml` si nécessaire.
